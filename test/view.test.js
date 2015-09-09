@@ -209,7 +209,7 @@ describe('view', function () {
   })
 
   // Only add "no jquery" tests if browser has a good DOM
-  if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined' && window.createElement) {
     if (typeof window.createElement === 'function') return
     if (typeof window.createElement('div').addEventListener === 'function') return
   }
