@@ -20,7 +20,7 @@ View.prototype.setElement = function (el) {
     el = el.get(0)
   }
   this.el = el
-  if (window.$) this.$el = this.$el || window.$(this.el)
+  if (window.$) this.$el = window.$(this.el)
 }
 
 /*
