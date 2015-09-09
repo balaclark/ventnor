@@ -16,6 +16,9 @@ function View(serviceLocator) {
 View.prototype = Object.create(EventEmitter.prototype)
 
 View.prototype.setElement = function (el) {
+  if (window.$ && el instanceof window.$) {
+    el = el.get(0)
+  }
   this.el = el
   if (window.$) this.$el = this.$el || window.$(this.el)
 }

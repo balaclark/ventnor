@@ -42,11 +42,19 @@ describe('view', function () {
     it('should create a jQuery DOM element for the view', function () {
       var v = new View()
       delete v.el
-      delete v.el
+      delete v.$el
       v.setElement(document.createElement('div'))
       assert(v.$el.get(0) instanceof window.HTMLDivElement)
     })
 
+    it('should allow a jQuery DOM element to be used', function () {
+      var v = new View()
+      delete v.el
+      delete v.$el
+      v.setElement(window.$('<div>'))
+      assert(v.el instanceof window.HTMLDivElement)
+      assert(v.$el.get(0) instanceof window.HTMLDivElement)
+    })
   })
 
   describe('listenTo()', function () {
