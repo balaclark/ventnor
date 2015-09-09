@@ -30,6 +30,25 @@ describe('view', function () {
 
   })
 
+  describe('setElement()', function () {
+
+    it('should create a DOM element for the view', function () {
+      var v = new View()
+      delete v.el
+      v.setElement(document.createElement('div'))
+      assert(v.el instanceof window.HTMLDivElement)
+    })
+
+    it('should create a jQuery DOM element for the view', function () {
+      var v = new View()
+      delete v.el
+      delete v.el
+      v.setElement(document.createElement('div'))
+      assert(v.$el.get(0) instanceof window.HTMLDivElement)
+    })
+
+  })
+
   describe('listenTo()', function () {
 
     it('should run callback function when the given object emits the desired event', function (done) {
@@ -230,8 +249,18 @@ describe('view', function () {
     })
 
     describe('new View()', function () {
-      it('should not create view.el if there is no jquery', function () {
+      it('should not create view.$el if there is no jquery', function () {
         var v = new View()
+        assert(v.el instanceof window.HTMLDivElement)
+        assert.equal(undefined, v.$el)
+      })
+    })
+
+    describe('setElement()', function () {
+      it('should not create view.$el if there is no jquery', function () {
+        var v = new View()
+        delete v.el
+        v.setElement(document.createElement('div'))
         assert(v.el instanceof window.HTMLDivElement)
         assert.equal(undefined, v.$el)
       })

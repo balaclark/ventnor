@@ -6,8 +6,7 @@ var EventEmitter = require('events').EventEmitter
 function View(serviceLocator) {
   EventEmitter.apply(this)
   this.serviceLocator = serviceLocator
-  this.el = this.el || document.createElement('div')
-  if (window.$) this.$el = this.$el || window.$(this.el)
+  this.setElement(this.el || document.createElement('div'))
   this._listeners = []
   this._domListeners = []
   this._views = { viewIds: {}, modelIds: {} }
@@ -15,6 +14,11 @@ function View(serviceLocator) {
 }
 
 View.prototype = Object.create(EventEmitter.prototype)
+
+View.prototype.setElement = function (el) {
+  this.el = el
+  if (window.$) this.$el = this.$el || window.$(this.el)
+}
 
 /*
  * Listen to an event on the provided object
